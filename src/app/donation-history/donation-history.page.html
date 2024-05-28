@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div (click)="goBack()" style="padding: 10px">
+      <img src="../../assets/icon/back-button.svg" />
+    </div>
+    <ion-title class="title">donation-history</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <div class="greetingWrapper">
+      <p class="greetingText">Thank you for your kind donations.</p>
+    </div>
+    <div class="sticker" *ngFor="let item of history">
+      <p class="price">${{item.amount}}</p>
+      <p class="madeOntext">Made on </p>
+      <p class="createAtDate">{{item.created_at | date :'fullDate'}}</p>
+    </div>
+  </div>
+</ion-content>

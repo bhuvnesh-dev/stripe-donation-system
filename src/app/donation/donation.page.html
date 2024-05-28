@@ -1,0 +1,98 @@
+<!-- <app-header pageTitle="Donate Us"></app-header> -->
+<ion-content [fullscreen]="true">
+
+  <div class="container">
+    <div class="campaign-card">
+      <ion-label class="heading">
+        Our campaign is powered by supporters like you.
+      </ion-label>
+      <ion-label class="card-title">Please select your donation:</ion-label>
+      <div class="amount-container" *ngFor="let item of amounts">
+        <div class="amount-button">
+          <img src="../../assets/dollar 1.svg" />
+          <ion-buttons (click)="handleDonation(item)">{{item}}$</ion-buttons>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ion-modal class="payment-modal" [isOpen]="paymentModal" backdropDismiss="false">
+    <ng-template>
+      <ion-content>
+        <div class="header">
+          <ion-title class="title">Donate us</ion-title>
+          <ion-buttons slot="end" (click)="closeModal()">
+            <ion-icon name="close" class="close-button" />
+          </ion-buttons>
+        </div>
+        <form [formGroup]="donationCardForm" (submit)="submitDonation()">
+          <ion-list>
+            <div class="details">
+              <ion-label class="labels">Card Holder Name</ion-label>
+              <ion-input class="input-fields" placeholder="Card Holder Name" type="" formControlName="name"
+                inputmode="text">
+              </ion-input>
+              <ion-label class="labels">Email</ion-label>
+              <ion-input class="input-fields" placeholder="Email Address" type="" formControlName="email"
+                inputmode="text"></ion-input>
+              <ion-label class="labels">Card Number</ion-label>
+              <ion-input class="input-fields" placeholder="Card Number" maxlength="16" minlength="14" type=""
+                formControlName="number" inputmode="tel"></ion-input>
+              <ion-label class="labels">DonationAmount</ion-label>
+              <ion-input value="donationCardForm.value.amount" class="input-fields" placeholder="Donation Amount"
+                inputmode="numeric" type="number" formControlName="amount"></ion-input>
+              <div class="small-fields">
+                <div>
+                  <ion-label class="labels">Card Expiry</ion-label>
+                  <ion-input class="inputs" placeholder="Card Expiry" [label]="" type="month"
+                    formControlName="card_expiry">
+                  </ion-input>
+                </div>
+                <div style="width: 20px;"></div>
+                <div>
+                  <ion-label class="labels">CVC</ion-label>
+                  <ion-input class="inputs" placeholder="CVC" maxlength="4" minlength="3" type="number"
+                    inputmode="numeric" formControlName="cvc"></ion-input>
+                </div>
+              </div>
+            </div>
+          </ion-list>
+          <div style="height: 300px;"></div>
+          <div class="footer">
+            <div class="payment-details">
+              <ion-label class="amount">{{donationCardForm.value.amount}}$</ion-label>
+              <ion-label class="label">Total Amount</ion-label>
+            </div>
+            <ion-buttons *ngIf="donationCardForm.valid" (click)="submitDonation()" class="submit-donation"
+              type="submit">Pay
+            </ion-buttons>
+            <ion-buttons *ngIf="!donationCardForm.valid" class="disabled-button" type="submit">Pay
+            </ion-buttons>
+          </div>
+        </form>
+
+      </ion-content>
+      <div *ngIf="spinner" class="spinner">
+        <ion-spinner name="lines-sharp"></ion-spinner>
+      </div>
+    </ng-template>
+  </ion-modal>
+</ion-content>
+<div *ngIf="showPopup" class="thankyou-modal">
+  <div class="thankyou">
+    <ion-icon name="close" (click)="closePopup()"></ion-icon>
+    <div class="content">
+      <img src="../../assets/icon/thankyou.svg" style="margin-bottom: 20px;" />
+      <ion-label class="label">Thank You</ion-label>
+      <ion-label class="label">For Your Support!</ion-label>
+    </div>
+  </div>
+</div>
+
+<div class="historyButton" (click)="gotoHistory()">
+  <img src="../../assets/Frame.svg" />
+</div>
+
+<div *ngIf="spinner" class="spinner">
+  <ion-spinner name="lines-sharp"></ion-spinner>
+</div>

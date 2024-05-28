@@ -1,0 +1,7 @@
+{
+  "name": "stripe-donation-system",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
